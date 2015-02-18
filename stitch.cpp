@@ -19,10 +19,10 @@ using namespace std;
 using namespace cv;
 using namespace cv::detail;
 
-vector<Mat> getImages(int argc, char *argv[]) {
+vector<Mat> getImages(int argc, int startIdx, char *argv[]) {
     vector<Mat> images;
     
-    for(int i = 3; i < argc; i++) {
+    for(int i = startIdx; i < argc; i++) {
         Mat img = imread(argv[i]);
         
         // Verifying the image opened correctly
@@ -55,12 +55,13 @@ Blender *getBlender(char *bn) {
 }
 
 void showUsage() { 
-    printf("Usage: stitch <blender> <output> <img1> <img2> ... <imgN>\n\n");
+    printf("Usage: stitch [-GPU] <blender> <output> <img1> <img2> ... <imgN>\n\n");
     printf("Version: 0.1\n");
     printf("Author: Kevin Midkiff\n");
     printf("Description: Simple image stitching command line tool using OpenCV\n\n");
     printf("WARNING: You must pass at least two images\n\n");
     printf("Argument Description:\n");
+    printf("\tGPU     - Flag to use the GPU\n");
     printf("\tblender - Which blender to use: Default, Feather, MultiBand\n");
     printf("\toutput  - Output filename\n\n");
 }
@@ -73,22 +74,36 @@ int main(int argc, char *argv[]) {
     
     vector<Mat> vImg;
     Mat rImg;
-    char *outName = argv[2];
+    bool useGPU = false;
+    int blenderIdx = 1;
+    int outNameIdx = 2;
+    int imgIdxStart = 3;
 
-    Stitcher stitcher = Stitcher::createDefault();
-    Blender *b;
-
-    if (strcmp(argv[1], "Default") != 0) {
-        b = getBlender(argv[1]);
-        stitcher.setBlender(b);
+    if (strcmp(argv[1], "-GPU") == 0) {
+        blenderIdx++;
+        outNameIdx++;
+        imgIdxStart++;
+        useGPU = true;
     }
 
-    vImg = getImages(argc, argv);
+    char *outName = argv[outNameIdx];
+
+    Stitcher stitcher = Stitcher::createDefault(useGPU);
+    Blender *b;
+
+    if (strcmp(argv[blenderIdx], "Default") != 0) {
+        b = getBlender(argv[blenderIdx]);
+        stitcher.setBlender(b);
+    }
+    
+    printf("Reading in images... ");
+    vImg = getImages(argc, imgIdxStart, argv);
+    printf("Done.\n");
     
     printf("Stitching images together.... "); 
     stitcher.stitch(vImg, rImg);
-    printf("Done.\n");
     imwrite(outName, rImg);
+    printf("Done.\n");
     
     return 0;
 }
