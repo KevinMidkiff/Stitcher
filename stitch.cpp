@@ -54,8 +54,8 @@ Blender *getBlender(char *bn) {
     return b;
 }
 
-void showUsage() { 
-    printf("Usage: stitch [-GPU] <blender> <output> <img1> <img2> ... <imgN>\n\n");
+void showUsage(char *binaryName) { 
+    printf("Usage: %s [-GPU] <blender> <output> <img1> <img2> ... <imgN>\n\n", binaryName);
     printf("Version: 0.1\n");
     printf("Author: Kevin Midkiff\n");
     printf("Description: Simple image stitching command line tool using OpenCV\n\n");
@@ -68,7 +68,7 @@ void showUsage() {
 
 int main(int argc, char *argv[]) {
     if (argc < 4) {
-        showUsage();
+        showUsage(argv[0]);
         exit(-1);
     }
     
