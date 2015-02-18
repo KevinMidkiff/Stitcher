@@ -8,8 +8,9 @@ $ g++ stitch.cpp -o stitch `pkg-config --cflags --libs opencv`
 ```
 
 # Usage
+Below is the command line usage of the tool.
 
-```sh
+```
 Usage: stitch [-GPU] <blender> <output> <img1> <img2> ... <imgN>
 
 Version: 0.1
