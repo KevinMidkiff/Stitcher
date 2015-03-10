@@ -25,5 +25,21 @@ Argument Description:
         output  - Output filename
 ```
 
+The, "data", directory includes sets of images for show casing the results of the stitcher.  To run use one of these data sets execute the following command on the command line:
+
+```sh
+$ ./stitch <blender> <output filename> ./data/<data directory>/*.png
+```
+
+The different data sets included are:
+<ul>
+<li>carmel</li>
+<li>diamondhead</li>
+<li>goldengate</li>
+<li>shanghai</li>
+</ul>
+
+The images are taken from the <a href="http://sourceforge.net/adobe/adobedatasets/home/Home/">Adobe Open Source Data Set</a>.
+
 # License
 This code is provided AS-IS with no support.
