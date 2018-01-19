@@ -10,10 +10,18 @@
 #include <stdio.h>
 
 // OpenCV Includes
+#include "opencv2/core/version.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
-#include "opencv2/stitching/stitcher.hpp"
 #include "opencv2/stitching/detail/blenders.hpp"
+
+// OpenCV 2.4.x has CV_VERSION_EPOCH defined, 3.x does not
+#if defined(CV_VERSION_EPOCH)
+#include "opencv2/stitching/stitcher.hpp"
+#elif CV_VERSION_MAJOR == 3
+#include "opencv2/stitching.hpp"
+#endif
+
 
 using namespace std;
 using namespace cv;
