@@ -1,10 +1,16 @@
 # Stitcher
 Simple command line tool using OpenCV to stitch images together as a panorama image.
 
+## Setup
+Prior to running compiling this project you must install OpenCV, and install
+cmake.
+
 # Compiling
 To compile the code using g++ use pkg-config for the following:
 ```sh
-$ g++ stitch.cpp -o stitch `pkg-config --cflags --libs opencv`
+$ mkdir build
+$ cd build
+$ cmake ..
 ```
 
 # Usage
