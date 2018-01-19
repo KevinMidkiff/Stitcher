@@ -5,7 +5,7 @@ Simple command line tool using OpenCV to stitch images together as a panorama im
 Prior to running compiling this project you must install OpenCV, and install
 cmake.
 
-# Compiling
+## Compiling
 To compile the code using g++ use pkg-config for the following:
 ```sh
 $ mkdir build
@@ -13,7 +13,7 @@ $ cd build
 $ cmake ..
 ```
 
-# Usage
+## Usage
 Below is the command line usage of the tool.
 
 ```
@@ -47,5 +47,5 @@ The different data sets included are:
 
 The images are taken from the <a href="http://sourceforge.net/adobe/adobedatasets/home/Home/">Adobe Open Source Data Set</a>.
 
-# License
-This code is provided AS-IS with no support.
+## License
+MIT License (see LICENSE file for details)
